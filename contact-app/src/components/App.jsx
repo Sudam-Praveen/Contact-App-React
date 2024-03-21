@@ -7,10 +7,11 @@ import { useState } from 'react'
 
 
 function App() {
-  const [contact, setContact] = useState([]);
+  const [contacts, setContact] = useState([]);
   
   const addContactHandler=(contact)=>{
-    console.log(contact)
+    console.log(contact);
+    setContact([...contacts,contact]) // take the all previos contacts and add the new contact 
   }
 
   return (
