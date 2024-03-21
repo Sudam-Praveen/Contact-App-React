@@ -1,14 +1,19 @@
 import React from 'react'
 import Header from './Header'
-import ContactList from './ContactList'
 import AddContact from './AddContact'
 import './App.css'
+import ContactList from './ContactList'
+
 
 function App() {
 
 
   return (
-    <div>Hello wrold</div>
+    <div>
+      <Header></Header>
+      <AddContact></AddContact>
+      <ContactList></ContactList>
+    </div>
   )
 }
 
