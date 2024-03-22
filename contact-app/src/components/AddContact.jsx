@@ -1,50 +1,46 @@
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
-import React from "react";
+const AddContact = (props) => {
+    const navigate = useNavigate();
+    const [state, setState] = useState({ name: '', email: '' });
 
-class AddContact extends React.Component {
-    state = {
-        name: '',
-        email: ''
-    }
-
-    add = (e) => {
-        e.preventDefault(); // This prevents the default behavior of the event this avoid unneccessary page loadings
-        if (this.state.name === "" || this.state.email === "") {
+    const add = (e) => {
+        e.preventDefault();
+        if (state.name === "" || state.email === "") {
             alert("All the fields are mandatory!");
             return;
         } 
-        console.log(this.state)
-        this.props.addContactHandler(this.state); //pass the data to the parrent component to the callback function
-        this.setState({ name: "", email: "" });
-    }
+        props.addContactHandler(state);
+        setState({ name: "", email: "" });
+        navigate('/');
+    };
 
-    render() {
-        return (
-            <div className="ui main" style={{marginTop:'50px'}}>
-                <h2>Add Contact</h2>
-                <form className="ui form" onSubmit={this.add}>
-                    <div className="field">
-                        <label>Name</label>
-                        <input type="text"
-                            name='name'
-                            placeholder='Enter Name'
-                            value={this.state.name}
-                            onChange={(e) => this.setState({ name: e.target.value })} />
-                    </div>
-                    <div className="field">
-                        <label>Email</label>
-                        <input type="text"
-                            name='email'
-                            placeholder='Enter Email'
-                            value={this.state.email}
-                            onChange={(e) => this.setState({ email: e.target.value })}
-                        />
-                    </div>
-                    <button className="ui button blue" type="submit"> Add</button>
-                </form>
-            </div>
-        )
-    }
-}
+    return (
+        <div className="ui main" style={{marginTop:'50px'}}>
+            <h2>Add Contact</h2>
+            <form className="ui form" onSubmit={add}>
+                <div className="field">
+                    <label>Name</label>
+                    <input type="text"
+                        name='name'
+                        placeholder='Enter Name'
+                        value={state.name}
+                        onChange={(e) => setState({ ...state, name: e.target.value })} />
+                </div>
+                <div className="field">
+                    <label>Email</label>
+                    <input type="text"
+                        name='email'
+                        placeholder='Enter Email'
+                        value={state.email}
+                        onChange={(e) => setState({ ...state, email: e.target.value })}
+                    />
+                </div>
+                <button className="ui button blue" type="submit"> Add</button>
+            </form>
+        </div>
+    );
+};
 
 export default AddContact;
