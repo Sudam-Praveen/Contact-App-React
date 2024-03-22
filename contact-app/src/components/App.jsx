@@ -7,6 +7,8 @@ import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom' // getting router features
+
 function App() {
   const [contacts, setContacts] = useState([]);
   const LOCAL_STORAGE_KEY = "contacts";
@@ -37,8 +39,16 @@ function App() {
   return (
     <div className='ui container'>
       <Header></Header>
-      <AddContact addContactHandler={addContactHandlerfunction} ></AddContact>
-      <ContactList contacts={contacts} getContactId={removeContactHandler}></ContactList>
+      <Router>
+
+        <Routes>
+
+          <Route path="/add" element={<AddContact addContactHandler={addContactHandlerfunction}  />} />
+          <Route path="/" element={<ContactList contacts={contacts} getContactId={removeContactHandler} />} />
+          {/* <AddContact addContactHandler={addContactHandlerfunction} ></AddContact>
+      <ContactList contacts={contacts} getContactId={removeContactHandler}></ContactList> */}
+        </Routes>
+      </Router>
     </div>
   )
 }
