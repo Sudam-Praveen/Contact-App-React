@@ -11,7 +11,9 @@ function App() {
   const [contacts, setContacts] = useState([]);
   const LOCAL_STORAGE_KEY = "contacts";
 
-  const addContactHandler = (contact) => {
+
+
+  const addContactHandlerfunction = (contact) => {
     console.log(contact);
     setContacts([...contacts, { id: uuidv4(), ...contact }]); // take the all previos contacts and add the new contact 
   }
@@ -24,14 +26,19 @@ function App() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts)); // add this to localstorage
   }, [contacts])
 
-
+  const removeContactHandler = (id) => {
+    const newContactList = contacts.filter((contact) => {
+      return contact.id !== id;
+    })
+    setContacts(newContactList)
+  }
 
 
   return (
     <div className='ui container'>
       <Header></Header>
-      <AddContact addContactHandler={addContactHandler} ></AddContact>
-      <ContactList contacts={contacts}></ContactList>
+      <AddContact addContactHandler={addContactHandlerfunction} ></AddContact>
+      <ContactList contacts={contacts} getContactId={removeContactHandler}></ContactList>
     </div>
   )
 }
